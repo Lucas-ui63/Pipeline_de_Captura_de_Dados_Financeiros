@@ -1,0 +1,5 @@
+TICKERS  = [
+    "ITUB4.SA", "CXSE3.SA"
+]
+PPERIOD= "5y"
+INTERVAL = "1d"
