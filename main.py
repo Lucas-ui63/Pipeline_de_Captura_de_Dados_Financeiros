@@ -48,7 +48,7 @@ class Banco:
             with conection.cursor() as cursor:
                 cursor.execute("""                            
                     CREATE TABLE IF NOT EXISTS raw_acoes (
-                        ticker VARCHAR(10) NOT NULL,
+                        ticker VARCHAR(10) NOT NULL UNIQUE,
                         dados_API JSONB,
                         ingested_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
                     );
@@ -59,7 +59,9 @@ class Banco:
             with conection.cursor() as cursor:
                 cursor.execute("""
                     INSERT INTO raw_acoes (ticker, dados_API)
-                    VALUES (%s, %s);
+                    VALUES (%s, %s)
+                    ON CONFLICT (ticker)
+                    DO NOTHING;
                 """, (ticker, dados_api))
                 conection.commit()
 db = Banco()
