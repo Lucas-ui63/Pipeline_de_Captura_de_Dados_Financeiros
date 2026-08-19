@@ -1,1 +1,3 @@
 vault.env
+__pycache__/
+*.pyc
